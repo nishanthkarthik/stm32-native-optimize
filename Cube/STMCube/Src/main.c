@@ -73,7 +73,7 @@ int main(void)
   SystemClock_Config();
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
+  //MX_GPIO_Init();
 
   /* USER CODE BEGIN 2 */
 
@@ -81,12 +81,24 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
+  
+	__GPIOC_CLK_ENABLE();
+	GPIO_InitTypeDef gpio;
+	gpio.Mode = GPIO_MODE_OUTPUT_PP;
+	gpio.Pin = GPIO_PIN_7;
+	gpio.Speed = GPIO_SPEED_HIGH;
+	HAL_GPIO_Init(GPIOC,&gpio);
+	
+	while (1)
   {
-		HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_14);
-		HAL_Delay(500);
-		HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_14);
-		HAL_Delay(500);
+//		HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_12);
+//		HAL_Delay(500);
+//		HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_12);
+//		HAL_Delay(500);
+			HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_7);
+			HAL_Delay(5000);
+			HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_7);
+			HAL_Delay(5000);
   }
   /* USER CODE END 3 */
 
